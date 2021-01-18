@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Todo app</title>
+</head>
+<body>
+    <div style="margin-top: 100;"class="container">
+    <h3>Todo List</h3>
+    <hr>
+
+    <form action="/add" method="POST">
+        
+        <div class="form-group">
+        <label for="formGroupExampleInput">Todo Başlık</label>
+       <input type="text" class="form-control" name="title" id="formGroupExampleInput" placeholder="Todo Giriniz...">
+       <button type="submit" class="btn btn-danger" >ekle</button>
+        </div>
+    
+    </form>
+    
+    
+    
+    
+    </div>
+    
+    
+   
+    {%if todos==[] %}
+    <div class="alert alert-warning" role="alert">
+        Herhangi bir todonuz bulunmuyor...
+    </div>
+    {%    else     %}
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">Todo Başlık</th>
+              <th scope="col">Todo Durum</th>
+              <th scope="col">Durum Güncelle</th>
+              <th scope="col">Todo Sil</th>
+            </tr>
+          </thead>
+          <tbody>
+              {%for todo in todos%}
+            <tr>
+              <th scope="row">{{todo.id}}</th>
+              <td>{{todo.title}}</td>
+              {%if todo.complete==False%}
+              <td>Tamamlanmadı</td>
+              {%    else     %}
+              <td>Tamamlandı</td>
+              {%    endif    %}
+              <td><a href="/complete/{{todo.id}}" class="btn btn-danger">Tamamla</a></td>
+              <td><a href="/delete/{{todo.id}}" class="btn btn-danger">Sil</a></td>
+            </tr>
+            
+                {% endfor %}
+          </tbody>
+      </table>
+      {%    endif   %}
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+</body>
+</html>
